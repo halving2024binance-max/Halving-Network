@@ -1,0 +1,8 @@
+{
+  "name": " 🥇⭐⭐😎😎😎⭐⭐🥇 Halving Sentinel | AI Security 🥇",
+  "description": "The official interface of the HALVING2024 Ai Sentinel. Built with a 12-layer security stack and live AI interaction to safeguard decentralized assets.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

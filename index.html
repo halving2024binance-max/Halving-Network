@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Halving Network | AI Sentinel</title>
+    <meta name="theme-color" content="#020617">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Default: Sentinel */
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --border-active: rgba(16, 185, 129, 0.2);
+            --grid-color: rgba(16, 185, 129, 0.03);
+            --orb-1: rgba(16, 185, 129, 0.2);
+            --orb-2: rgba(99, 102, 241, 0.2);
+            --orb-3: rgba(6, 182, 212, 0.1);
+        }
+
+        .theme-blackwell {
+            --bg-primary: #000000;
+            --bg-secondary: #050505;
+            --bg-tertiary: #111111;
+            --accent: #76b900;
+            --accent-glow: rgba(118, 185, 0, 0.4);
+            --grid-color: rgba(118, 185, 0, 0.03);
+            --orb-1: rgba(118, 185, 0, 0.15);
+            --orb-2: rgba(30, 30, 30, 0.3);
+            --orb-3: rgba(118, 185, 0, 0.05);
+        }
+
+        .theme-quantum {
+            --bg-primary: #0f0720;
+            --bg-secondary: #1a0b35;
+            --bg-tertiary: #25104d;
+            --accent: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.4);
+            --grid-color: rgba(124, 58, 237, 0.05);
+            --orb-1: rgba(124, 58, 237, 0.2);
+            --orb-2: rgba(245, 158, 11, 0.15);
+            --orb-3: rgba(139, 92, 246, 0.1);
+        }
+
+        .theme-frost {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --grid-color: rgba(6, 182, 212, 0.05);
+            --orb-1: rgba(6, 182, 212, 0.1);
+            --orb-2: rgba(59, 130, 246, 0.1);
+            --orb-3: rgba(14, 165, 233, 0.05);
+            --border-subtle: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-cyberpunk {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #121217;
+            --bg-tertiary: #1a1a24;
+            --accent: #ff00ff;
+            --accent-glow: rgba(255, 0, 255, 0.4);
+            --grid-color: rgba(255, 0, 255, 0.04);
+            --orb-1: rgba(255, 0, 255, 0.15);
+            --orb-2: rgba(0, 255, 255, 0.15);
+            --orb-3: rgba(255, 255, 0, 0.05);
+        }
+
+        .theme-crimson {
+            --bg-primary: #0d0101;
+            --bg-secondary: #1a0202;
+            --bg-tertiary: #2a0404;
+            --accent: #e11d48;
+            --accent-glow: rgba(225, 29, 72, 0.4);
+            --grid-color: rgba(225, 29, 72, 0.04);
+            --orb-1: rgba(225, 29, 72, 0.15);
+            --orb-2: rgba(0, 0, 0, 0.5);
+            --orb-3: rgba(190, 18, 60, 0.1);
+        }
+
+        .theme-monochrome {
+            --bg-primary: #121212;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --accent: #ffffff;
+            --accent-glow: rgba(255, 255, 255, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.02);
+            --orb-1: rgba(255, 255, 255, 0.05);
+            --orb-2: rgba(50, 50, 50, 0.2);
+            --orb-3: rgba(255, 255, 255, 0.03);
+        }
+
+        .theme-forest {
+            --bg-primary: #050a05;
+            --bg-secondary: #0a150a;
+            --bg-tertiary: #122512;
+            --accent: #22c55e;
+            --accent-glow: rgba(34, 197, 94, 0.4);
+            --grid-color: rgba(34, 197, 94, 0.03);
+            --orb-1: rgba(34, 197, 94, 0.15);
+            --orb-2: rgba(21, 128, 61, 0.1);
+            --orb-3: rgba(16, 185, 129, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            overflow-x: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .cyber-grid {
+            background-image: radial-gradient(circle at 2px 2px, var(--grid-color) 1px, transparent 0);
+            background-size: 32px 32px;
+            position: relative;
+        }
+
+        .cyber-grid::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 128px 128px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-orb {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -2;
+            pointer-events: none;
+            transition: background 1s ease-in-out;
+        }
+
+        .glass {
+            background: rgba(var(--bg-primary-rgb, 15, 23, 42), 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .premium-card {
+            background: rgba(var(--bg-primary-rgb, 15, 23, 42), 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .premium-card:hover {
+            border-color: var(--accent);
+            background: rgba(var(--bg-primary-rgb, 15, 23, 42), 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5), 0 0 20px -5px var(--accent-glow);
+        }
+
+        .theme-sentinel::after, .theme-blackwell::after, .theme-quantum::after, 
+        .theme-cyberpunk::after, .theme-monochrome::after, .theme-crimson::after, .theme-forest::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { 
+            background: var(--bg-tertiary); 
+            border-radius: 10px; 
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        h1, h2, h3, h4 {
+            letter-spacing: -0.04em;
+        }
+
+        .text-theme-accent { color: var(--accent); }
+        .bg-theme-accent { background-color: var(--accent); }
+        .border-theme-accent { border-color: var(--accent); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "recharts": "https://esm.sh/recharts@^2.15.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="theme-sentinel">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
